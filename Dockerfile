@@ -1,7 +1,15 @@
-FROM nginx:1.15.7
+FROM maven:3.6.0 as mvnpackage
 
-COPY index.html /usr/share/nginx/html/index.html
+COPY ./ /src/
 
-ENV STAGE=devel
+WORKDIR /src
 
-CMD /bin/bash -c "sed -i 's/ENVIRONMENT/${STAGE}/g' /usr/share/nginx/html/index.html  && exec nginx -g 'daemon off;'"
+RUN mvn package
+
+#========================
+
+FROM openjdk:8-jre-alpine
+
+COPY --from=mvnpackage /src/target/kekse-0.0.1-SNAPSHOT.jar /
+
+ENTRYPOINT ["java", "-jar", "/kekse-0.0.1-SNAPSHOT.jar"]

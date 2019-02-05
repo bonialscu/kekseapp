@@ -12,12 +12,12 @@ public class Kekse {
 	}
 
 	@RequestMapping("/liveness")
-	String kekse() {
+	String liveness() {
 		return "{\"status\":\"UP\"}";
 	}
 
 	@RequestMapping("/readyness")
-	String kekse() {
+	String readyness() {
 		return "{\"status\":\"UP\"}";
 	}
 

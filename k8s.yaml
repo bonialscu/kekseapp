@@ -77,4 +77,6 @@ spec:
     - port: 8080
       name: http
       targetPort: 8080
+  selector:
+    app: kekse
   type: ClusterIP

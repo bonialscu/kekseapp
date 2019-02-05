@@ -8,7 +8,7 @@ public class Kekse {
 
 	@RequestMapping("/")
 	String kekse() {
-		return "In need for Kekse!";
+		return "{\"need_more\": \"kekse\"}";
 	}
 
 	public static void main(String[] args) {

@@ -27,10 +27,12 @@ spec:
             httpGet:
               path: "/liveness"
               port: health
+            initialDelaySeconds: 20
           readinessProbe:
             httpGet:
               path: "/readyness"
               port: health
+            initialDelaySeconds: 20
           resources:
             limits:
               cpu: 2000m

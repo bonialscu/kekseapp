@@ -25,14 +25,20 @@ spec:
               name: http
           livenessProbe:
             httpGet:
-              path: "/liveness"
-              port: health
+              path: "/health"
+              port: http
             initialDelaySeconds: 20
+            timeoutSeconds: 2
+            periodSeconds: 3
+            failureThreshold: 1
           readinessProbe:
             httpGet:
-              path: "/readyness"
-              port: health
+              path: "/health"
+              port: http
             initialDelaySeconds: 20
+            timeoutSeconds: 2
+            periodSeconds: 3
+            failureThreshold: 1
           resources:
             limits:
               cpu: 2000m

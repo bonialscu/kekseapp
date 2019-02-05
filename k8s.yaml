@@ -6,10 +6,15 @@ spec:
   replicas: 2
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: kekse
   template:
     metadata:
       annotations:
         iam.amazonaws.com/role: TODO_ROLE_VALUE
+      labels:
+        app: kekse
     spec:
       containers:
         - name: app

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kekse
+spec:
+  replicas: 2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        iam.amazonaws.com/role: TODO_ROLE_VALUE
+    spec:
+      containers:
+        - name: app
+          image: TODO_IMAGE_VALUE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          livenessProbe:
+            httpGet:
+              path: "/liveness"
+              port: health
+          readinessProbe:
+            httpGet:
+              path: "/readyness"
+              port: health
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/whitelist-source-range: "0.0.0.0/0"
+  name: ingress
+spec:
+  rules:
+  - host: TODO_DNS_NAME
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kekse
+          servicePort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kekse
+spec:
+  ports:
+    - port: 8080
+      name: http
+      targetPort: 8080
+  type: ClusterIP

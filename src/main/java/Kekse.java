@@ -13,12 +13,12 @@ public class Kekse {
 
 	@RequestMapping("/liveness")
 	String kekse() {
-		return "I am the liveness monster.";
+		return "{\"status\":\"UP\"}";
 	}
 
 	@RequestMapping("/readyness")
 	String kekse() {
-		return "I am ready. Hit me.";
+		return "{\"status\":\"UP\"}";
 	}
 
 	public static void main(String[] args) {

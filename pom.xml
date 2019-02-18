@@ -28,7 +28,6 @@
 			<name>JCenter</name>
 			<url>https://jcenter.bintray.com</url>
 		</repository>
-
 	</repositories>
 
 	<parent>

@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: "1.0"
-description: The kekseapp Helm chart for Kubernetes
-name: kekseapp
-version: 1.0
